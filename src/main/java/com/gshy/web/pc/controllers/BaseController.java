@@ -2,7 +2,7 @@ package com.gshy.web.pc.controllers;
 
 import com.bj58.wf.mvc.MvcController;
 import com.bj58.ycs.tool.webutil.tools.Md5Helper;
-import com.gshy.web.pc.bll.EmployeeBLL;
+import com.gshy.web.service.bll.EmployeeBLL;
 
 public class BaseController extends MvcController{
 	

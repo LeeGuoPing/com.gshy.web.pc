@@ -26,6 +26,11 @@
 			<artifactId>com.bj58.ycs.tool.webutil</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>com.gshy.web</groupId>
+			<artifactId>com.gshy.web.service</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
   </dependencies>
 
 	<build>
