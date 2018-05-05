@@ -1,4 +1,4 @@
-package com.gshy.web.pc.controllers;
+package com.bj58.web.pc.controllers;
 
 import com.bj58.wf.mvc.ActionResult;
 import com.bj58.wf.mvc.annotation.GET;
@@ -22,11 +22,11 @@ public class LoginController extends BaseController{
 			}
 			String dataPassword = emp.getPassword();
 			if (password.equals(dataPassword)) {
-
+				return new ActionResult4JSON("{\"ret\":\"1\",\"msg\":\"登陆成功!\"}");
 			} 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return new ActionResult4JSON("{\"ret\":\"-1\",\"msg\":\"用户名或密码错误!\"}");
 	}
 }

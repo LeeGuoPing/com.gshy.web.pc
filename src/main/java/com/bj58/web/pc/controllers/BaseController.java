@@ -1,4 +1,4 @@
-package com.gshy.web.pc.controllers;
+package com.bj58.web.pc.controllers;
 
 import com.bj58.wf.mvc.MvcController;
 import com.bj58.ycs.tool.webutil.tools.Md5Helper;

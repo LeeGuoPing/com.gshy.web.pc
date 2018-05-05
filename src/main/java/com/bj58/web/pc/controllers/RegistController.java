@@ -1,4 +1,4 @@
-package com.gshy.web.pc.controllers;
+package com.bj58.web.pc.controllers;
 
 import java.util.Date;
 
@@ -24,6 +24,10 @@ public class RegistController extends BaseController{
 			String userName = ParamHelper.getString(beat,"userName","");
 			String email = ParamHelper.getString(beat, "email", "");
 			String password = ParamHelper.getString(beat, "password", "");
+			System.out.println("phone: "+phone);
+			System.out.println("userName: "+userName);
+			System.out.println("email: "+email);
+			System.out.println("password: "+password);
 			// 查询库中是否存在
 			Employee employee = employeeBLL.getByEmail(email);
 			if (employee != null) {
@@ -36,13 +40,14 @@ public class RegistController extends BaseController{
 			emp.setEmail(email);
 			emp.setPassword(encPassword);
 			emp.setAddTime(new Date());
-			emp.setUseName(userName);
+			emp.setUserName(userName);
 			emp.setPhone(phone);
-			long resultId = employeeBLL.addEmployee(employee);
+			long resultId = employeeBLL.addEmployee(emp);
 			log.info("注册结果ID: "+resultId);
 			return new ActionResult4JSON("{\"ret\":\"1\",\"msg\":\"success!\"}");
 		} catch (Exception e) {
 			log.error("RegistController defaultRegist error",e);
+			e.printStackTrace();
 		}
 		return new ActionResult4JSON("{\"ret\":\"-1\",\"msg\":\"fail!\"}");
 	}
