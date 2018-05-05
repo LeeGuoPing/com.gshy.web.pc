@@ -46,9 +46,29 @@ public class RegistController extends BaseController{
 			log.info("注册结果ID: "+resultId);
 			return new ActionResult4JSON("{\"ret\":\"1\",\"msg\":\"success!\"}");
 		} catch (Exception e) {
-			log.error("RegistController defaultRegist error",e);
+			log.error("RegistController fastRegist error",e);
 			e.printStackTrace();
 		}
 		return new ActionResult4JSON("{\"ret\":\"-1\",\"msg\":\"fail!\"}");
+	}
+	
+	/**
+	 * 离职
+	 */
+	@Path("/remove")
+	public ActionResult remove(long empId){
+		try {
+			Employee emp = employeeBLL.getById(empId);
+			if(emp==null){
+				return new ActionResult4JSON("{\"ret\":\"-1\",\"msg\":\"此用户不存在!\"}");
+			}
+			employeeBLL.removeById(empId);
+			return new ActionResult4JSON("{\"ret\":\"1\",\"msg\":\"success!\"}");
+		} catch (Exception e) {
+			log.error("RegistController editMsg error",e);
+			e.printStackTrace();
+		}
+		return new ActionResult4JSON("{\"ret\":\"-1\",\"msg\":\"fail!\"}");
+		
 	}
 }
