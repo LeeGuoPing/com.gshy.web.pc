@@ -7,9 +7,12 @@ import com.bj58.web.pc.vo.MortgageSearchVO;
 import com.bj58.wf.mvc.ActionResult;
 import com.bj58.wf.mvc.BeatContext.Model;
 import com.bj58.wf.mvc.annotation.Path;
+import com.bj58.ycs.tool.webutil.actionresult.ActionResult4JSON;
 import com.bj58.ycs.tool.webutil.tools.PageTool;
+import com.bj58.ycs.tool.webutil.tools.ParamHelper;
 import com.bj58.ycs.tool.webutil.tools.VOInitHelper;
 import com.gshy.web.service.entity.AdvanceMoney;
+import com.gshy.web.service.entity.AuditInterface;
 import com.gshy.web.service.entity.Mortgage;
 import com.gshy.web.service.enums.AuditStatusEnum;
 import com.gshy.web.service.query.AdvanceMoneyQuery;
@@ -91,12 +94,42 @@ public class AuditMangeController extends BaseController{
 		
 	@Path("/pass")
 	public ActionResult pass(){
-		return null;
+		try {
+			int type = ParamHelper.getInt(beat, "type", 0); // 审核类型  1.房抵资料报送 2.垫资
+			long id = ParamHelper.getLong(beat, "id", 0);
+			if (type == 0 || id == 0) {
+				return new ActionResult4JSON("{\"ret\":\"-1\",\"msg\":\"非法参数!\"}");
+			}
+			AuditInterface auditInterface = auditService.getAudit(type, id);
+			if (auditInterface == null) {
+				return new ActionResult4JSON("{\"ret\":\"-1\",\"msg\":\"该审核记录不存在!\"}");
+			}
+			auditService.pass(type, id);
+			return new ActionResult4JSON("{\"ret\":\"1\",\"msg\":\"success!\"}");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new ActionResult4JSON("{\"ret\":\"-1\",\"msg\":\"fail!\"}");
 	}
 	
 	@Path("/refuse")
 	public ActionResult refuse(){
-		return null;
+		try {
+			int type = ParamHelper.getInt(beat, "type", 0); // 审核类型  1.房抵资料报送 2.垫资
+			long id = ParamHelper.getLong(beat, "id", 0);
+			if (type == 0 || id == 0) {
+				return new ActionResult4JSON("{\"ret\":\"-1\",\"msg\":\"非法参数!\"}");
+			}
+			AuditInterface auditInterface = auditService.getAudit(type, id);
+			if (auditInterface == null) {
+				return new ActionResult4JSON("{\"ret\":\"-1\",\"msg\":\"该审核记录不存在!\"}");
+			}
+			auditService.fail(type, id);
+			return new ActionResult4JSON("{\"ret\":\"1\",\"msg\":\"success!\"}");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new ActionResult4JSON("{\"ret\":\"-1\",\"msg\":\"fail!\"}");
 	}
 	
 	
