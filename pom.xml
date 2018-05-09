@@ -39,7 +39,7 @@
   </dependencies>
 
 	<build>
-		<finalName>com.gshy.web.api</finalName>
+		<finalName>com.gshy.web.pc</finalName>
 		<plugins>
 			<!-- mavan编译插件 -->
 			<plugin>
