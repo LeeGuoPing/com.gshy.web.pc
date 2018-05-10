@@ -41,12 +41,14 @@ public class AuditMangeController extends BaseController{
 			
 			System.out.println(waitCount+": "+successCount+": "+failcount);
 			Model model = beat.getModel();
+			commonTools(beat);
 			model.add("mortgages",mortgages);
 			model.add("count", count);
 			model.add("waitCount",waitCount);
 			model.add("successCount",successCount);
 			model.add("failcount",failcount);
-			
+			model.add("employeeMap",employeeMap);
+						
 			model.add("pageTool", PageTool.getInstance().page2(beat.getClient().getRelativeUrl(), query.getPage(),
 					query.getPageSize(), count, vo.paramMap()));
 			
