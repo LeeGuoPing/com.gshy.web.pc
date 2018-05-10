@@ -53,7 +53,7 @@ public class AuditMangeController extends BaseController{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return ActionResult.view("/home");
 	}
 	
 	/**
@@ -89,7 +89,7 @@ public class AuditMangeController extends BaseController{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return ActionResult.view("/money");
 	}
 		
 	@Path("/pass")
