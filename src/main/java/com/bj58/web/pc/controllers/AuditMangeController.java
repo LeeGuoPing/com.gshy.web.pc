@@ -53,7 +53,7 @@ public class AuditMangeController extends BaseController{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return ActionResult.view("/home");
+		return ActionResult.view("/house");
 	}
 	
 	/**
