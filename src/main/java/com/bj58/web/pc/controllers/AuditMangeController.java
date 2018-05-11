@@ -44,6 +44,7 @@ public class AuditMangeController extends BaseController{
 			commonTools(beat);
 			model.add("mortgages",mortgages);
 			model.add("count", count);
+			model.add("vo",vo);
 			model.add("waitCount",waitCount);
 			model.add("successCount",successCount);
 			model.add("failcount",failcount);
@@ -80,6 +81,7 @@ public class AuditMangeController extends BaseController{
 			System.out.println(waitCount+": "+successCount+": "+failcount);
 			Model model = beat.getModel();
 			model.add("mortgages",mortgages);
+			model.add("vo", vo);
 			model.add("count", count);
 			model.add("waitCount",waitCount);
 			model.add("successCount",successCount);

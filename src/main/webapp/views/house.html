@@ -27,20 +27,20 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-content">
                         <!-- 表单查询 -->
-                        <form role="form" class="form row form-horizontal">
+                        <form action="/audit/mortgage/list" role="form" class="form row form-horizontal">
                             <div class="row">
                                 <div class="form-group col-xs-4">
-                                    <label class="col-sm-4 control-label">用户id</label>
+                                    <label class="col-sm-4 control-label">用户姓名</label>
 
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" placeholder="请输入用户id">
+                                        <input type="text" class="form-control" name="createName" placeholder="请输入用户姓名" value=$!{vo.createName}>
                                     </div>
                                 </div>
                                 <div class="form-group col-xs-8">
                                     <label class="col-sm-2 control-label">时间筛选：</label>
                                     <div class="col-sm-10">
-                                        <input placeholder="开始日期" class="form-control layer-date" id="start">
-                                        <input placeholder="结束日期" class="form-control layer-date" id="endind">
+                                        <input placeholder="开始日期" name="createTimeStart" class="form-control layer-date" id="start" value="$!{vo.createTimeStart}">
+                                        <input placeholder="结束日期" name="createTimeEnd" class="form-control layer-date" id="ending" value="$!{vo.createTimeEnd}">
                                     </div>
                                 </div>
                             </div>
