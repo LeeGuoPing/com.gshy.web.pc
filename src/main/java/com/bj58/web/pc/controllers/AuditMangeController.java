@@ -6,6 +6,7 @@ import com.bj58.web.pc.vo.AdvanceMoneySearchVO;
 import com.bj58.web.pc.vo.MortgageSearchVO;
 import com.bj58.wf.mvc.ActionResult;
 import com.bj58.wf.mvc.BeatContext.Model;
+import com.bj58.wf.mvc.annotation.GET;
 import com.bj58.wf.mvc.annotation.Path;
 import com.bj58.ycs.tool.webutil.actionresult.ActionResult4JSON;
 import com.bj58.ycs.tool.webutil.tools.PageTool;
@@ -63,6 +64,7 @@ public class AuditMangeController extends BaseController{
 	 * 垫资
 	 */
 	@Path("/advance/list")
+	@GET
 	public ActionResult advanceList(){
 		try {
 			AdvanceMoneySearchVO vo = VOInitHelper.initVO(beat, AdvanceMoneySearchVO.class);
@@ -71,7 +73,7 @@ public class AuditMangeController extends BaseController{
 			AdvanceMoneyQuery successQuery = vo.countQuery(AuditStatusEnum.AuditSuccess.getValue());
 			AdvanceMoneyQuery failQuery = vo.countQuery(AuditStatusEnum.AuditFail.getValue());
 			
-			List<AdvanceMoney> mortgages = advanceMoneyBLL.getByQuery(query);
+			List<AdvanceMoney> advanceMoneys = advanceMoneyBLL.getByQuery(query);
 			int count = advanceMoneyBLL.getCount(query);
 			
 			int waitCount = advanceMoneyBLL.getCount(waitQuery);
@@ -80,13 +82,12 @@ public class AuditMangeController extends BaseController{
 			
 			System.out.println(waitCount+": "+successCount+": "+failcount);
 			Model model = beat.getModel();
-			model.add("mortgages",mortgages);
+			model.add("advanceMoneys",advanceMoneys);
 			model.add("vo", vo);
 			model.add("count", count);
 			model.add("waitCount",waitCount);
 			model.add("successCount",successCount);
 			model.add("failcount",failcount);
-			
 			model.add("pageTool", PageTool.getInstance().page2(beat.getClient().getRelativeUrl(), query.getPage(),
 					query.getPageSize(), count, vo.paramMap()));
 			
