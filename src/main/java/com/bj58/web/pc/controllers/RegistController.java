@@ -17,7 +17,7 @@ public class RegistController extends BaseController{
 	@Path("list")
 	public ActionResult registList(){
 		try {
-			List<Employee> employees = employeeBLL.getAllEmployee();
+			List<Employee> employees = employeeBLL.getAllEmployeeValid();
 			commonTools(beat);
 			beat.getModel().add("employees",employees);
 			return ActionResult.view("/employeelist");
