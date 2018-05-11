@@ -1,6 +1,7 @@
 package com.bj58.web.pc.controllers;
 
 import java.util.Date;
+import java.util.List;
 
 import com.bj58.wf.mvc.ActionResult;
 import com.bj58.wf.mvc.annotation.POST;
@@ -11,6 +12,20 @@ import com.gshy.web.service.entity.Employee;
 
 @Path("/regist")
 public class RegistController extends BaseController{
+	
+	
+	@Path("list")
+	public ActionResult registList(){
+		try {
+			List<Employee> employees = employeeBLL.getAllEmployee();
+			commonTools(beat);
+			beat.getModel().add("employees",employees);
+			return ActionResult.view("/employeelist");
+		} catch (Exception e) {
+			log.info("获取员工列表出错",e);
+		}
+		return ActionResult.view("/employeelist");
+	}
 	
 	/**
 	 * 快速注册

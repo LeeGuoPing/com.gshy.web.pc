@@ -8,7 +8,7 @@ public class MD5Test {
 	
 	@Test
 	public void test01(){
-		String md5Encrypt = Md5Helper.md5Encrypt(Md5Helper.md5Encrypt("aaa123"));
+		String md5Encrypt = Md5Helper.md5Encrypt(Md5Helper.md5Encrypt("123456"));
 		System.out.println(md5Encrypt);
 	}
 }
