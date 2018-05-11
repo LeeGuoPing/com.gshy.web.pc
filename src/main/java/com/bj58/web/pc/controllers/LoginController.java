@@ -14,8 +14,9 @@ public class LoginController extends BaseController{
 	@GET
 	public ActionResult fastLogin(){
 		try {
-			String email = ParamHelper.getString(beat, "email", "");
-			String password = ParamHelper.getString(beat, "password", "");
+			String email = ParamHelper.getString(beat, "email", "").trim();
+			String password = ParamHelper.getString(beat, "password", "").trim();
+			log.info("email is " + email + "password is " + password);
 			Employee emp = employeeBLL.getByEmail(email);
 			if (emp == null) {
 				return new ActionResult4JSON("{\"ret\":\"-1\",\"msg\":\"用户名或密码错误!\"}");

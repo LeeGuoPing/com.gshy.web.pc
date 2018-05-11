@@ -40,7 +40,7 @@ public class AuditMangeController extends BaseController{
 			int successCount = mortgageBLL.getCount(successQuery);
 			int failcount = mortgageBLL.getCount(failQuery);
 			
-			System.out.println(waitCount+": "+successCount+": "+failcount);
+			log.info("待审核的数量:" + waitCount + "审核通过的数量：" + successCount + "审核失败数量" + failcount);
 			Model model = beat.getModel();
 			commonTools(beat);
 			model.add("mortgages",mortgages);
@@ -80,7 +80,7 @@ public class AuditMangeController extends BaseController{
 			int successCount = advanceMoneyBLL.getCount(successQuery);
 			int failcount = advanceMoneyBLL.getCount(failQuery);
 			
-			System.out.println(waitCount+": "+successCount+": "+failcount);
+			log.info("待审核的数量:" + waitCount + "审核通过的数量：" + successCount + "审核失败数量" + failcount);
 			Model model = beat.getModel();
 			model.add("advanceMoneys",advanceMoneys);
 			model.add("vo", vo);
@@ -102,6 +102,7 @@ public class AuditMangeController extends BaseController{
 		try {
 			int type = ParamHelper.getInt(beat, "type", 0); // 审核类型  1.房抵资料报送 2.垫资
 			long id = ParamHelper.getLong(beat, "id", 0);
+			log.info("type is " + type + "id is " + id);
 			if (type == 0 || id == 0) {
 				return new ActionResult4JSON("{\"ret\":\"-1\",\"msg\":\"非法参数!\"}");
 			}
@@ -122,6 +123,7 @@ public class AuditMangeController extends BaseController{
 		try {
 			int type = ParamHelper.getInt(beat, "type", 0); // 审核类型  1.房抵资料报送 2.垫资
 			long id = ParamHelper.getLong(beat, "id", 0);
+			log.info("type is " + type + "id is " + id);
 			if (type == 0 || id == 0) {
 				return new ActionResult4JSON("{\"ret\":\"-1\",\"msg\":\"非法参数!\"}");
 			}

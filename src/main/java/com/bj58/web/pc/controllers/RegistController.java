@@ -20,14 +20,14 @@ public class RegistController extends BaseController{
 	@POST
 	public ActionResult fastRegist(){
 		try {
-			String phone = ParamHelper.getString(beat,"phone","");
-			String userName = ParamHelper.getString(beat,"userName","");
-			String email = ParamHelper.getString(beat, "email", "");
-			String password = ParamHelper.getString(beat, "password", "");
-			System.out.println("phone: "+phone);
-			System.out.println("userName: "+userName);
-			System.out.println("email: "+email);
-			System.out.println("password: "+password);
+			String phone = ParamHelper.getString(beat,"phone","").trim();
+			String userName = ParamHelper.getString(beat,"userName","").trim();
+			String email = ParamHelper.getString(beat, "email", "").trim();
+			String password = ParamHelper.getString(beat, "password", "").trim();
+			log.info("phone: "+phone);
+			log.info("userName: "+userName);
+			log.info("email: "+email);
+			log.info("password: "+password);
 			// 查询库中是否存在
 			Employee employee = employeeBLL.getByEmail(email);
 			if (employee != null) {
