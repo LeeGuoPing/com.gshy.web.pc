@@ -139,8 +139,6 @@
             });
         });
     </script>
-    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
-    <!--统计代码，可删除-->
     <!-- Sweet alert -->
     <script src="http://static.haoyejinfu.com:8088/js/plugins/sweetalert/sweetalert.min.js"></script>
     <!-- layerDate plugin javascript -->
@@ -152,7 +150,7 @@
             format: 'YYYY/MM/DD',
             min: laydate.now(), //设定最小日期为当前日期
             max: '2099-06-16 23:59:59', //最大日期
-            istime: true,
+            istime: false,
             istoday: false,
             choose: function (datas) {
                 end.min = datas; //开始日选好后，重置结束日的最小日期
@@ -164,7 +162,7 @@
             format: 'YYYY/MM/DD',
             min: laydate.now(),
             max: '2099-06-16 23:59:59',
-            istime: true,
+            istime: false,
             istoday: false,
             choose: function (datas) {
                 start.max = datas; //结束日选好后，重置开始日的最大日期
@@ -196,7 +194,6 @@
             });
 
         });
-    </script>
     </script>
 </body>
 
