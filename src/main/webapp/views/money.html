@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <title>H+ 后台主题UI框架 - 基础表格</title>
+    <title>后台管理中心-主页</title>
     <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
     <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
 
@@ -30,10 +30,10 @@
                         <form role="form" class="form row form-horizontal">
                             <div class="row">
                                 <div class="form-group col-xs-4">
-                                    <label class="col-sm-4 control-label">用户id</label>
+                                    <label class="col-sm-4 control-label">员工ID</label>
 
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" placeholder="请输入用户id">
+                                        <input type="text" class="form-control" placeholder="请输入员工id">
                                     </div>
                                 </div>
                                 <div class="form-group col-xs-8">
@@ -61,12 +61,12 @@
                         <table class="table table-hover table-bordered">
                             <thead>
                                 <tr>
-                                    <th>序号</th>
-                                    <th>抵押情况</th>
-                                    <th>抵押权</th>
-                                    <th>一抵金额</th>
-                                    <th>二抵金额</th>
-                                    <th>本次借资</th>
+                                    <th>垫资编号</th>
+                                    <th>上家名称</th>
+                                    <th>下家名称</th>
+                                    <th>垫资情况</th>
+                                    <th>一低/二抵</th>
+                                    <th>本次借款</th>
                                     <th>创建人</th>
                                     <th>创建时间</th>
                                     <th>审核人</th>
@@ -78,18 +78,35 @@
                             <tbody>
                             #foreach($advanceMoney in $advanceMoneys)
                                 <tr>
-                                    <td>1</td>
-                                    <td>张三</td>
-                                    <td>张三</td>
+                                    <td>$!{advanceMoney.id}</td>
+                                    <td>$!{advanceMoney.preHome}</td>
+                                    <td>$!{advanceMoney.nextHome}</td>
+                                    <td>$!{advanceMoney.situation}</td>
+                                    <td>$!{advanceMoney.firstBalance}</td>
+                                    <td>$!{advanceMoney.borrowMoney}</td>
+                                    <td>$!{employeeMap.get($!{advanceMoney.createEmp}).userName}</td>
+                                    <td>$!{dateTool.formatISODatetime($!{advanceMoney.createTime})}</td>
+                                    <td>$!{employeeMap.get($!{advanceMoney.auditEmp}).userName}</td>
+                                    <td>$!{dateTool.formatISODatetime($!{advanceMoney.auditTime})}</td>
                                     <td>
+                                    	#if($!{advanceMoney.auditState}==0)待审核
+                                    	#elseif($!{advanceMoney.auditState}==1)审核成功
+                                    	#elseif($!{advanceMoney.auditState}==2)审核失败
+                                    	#else
+                                    	#end
+                                    	</td>
+                                    <td>
+                                    	 #if($!{mortgage.auditState}==0)
                                         <button type="button" class="btn btn-w-m btn-info auditing">审核</button>
+                                        #else
+                                        #end
                                         <a class="btn btn-w-m btn-primary" href="">查看详情</a>
                                     </td>
                                 </tr>
                               #end
                             </tbody>
                         </table>
-                        <!-- 分页 -->
+                         $!{pageTool}
                         <div class="row text-center">
                             <div class="btn-group">
                                 <a class="btn btn-white"><i class="fa fa-chevron-left"></i></a>
