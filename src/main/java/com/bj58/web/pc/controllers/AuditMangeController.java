@@ -92,6 +92,7 @@ public class AuditMangeController extends BaseController{
 			
 			log.info("待审核的数量:" + waitCount + "审核通过的数量：" + successCount + "审核失败数量" + failcount);
 			Model model = beat.getModel();
+			commonTools(beat);
 			model.add("advanceMoneys",advanceMoneys);
 			model.add("vo", vo);
 			model.add("count", count);
@@ -154,7 +155,7 @@ public class AuditMangeController extends BaseController{
 	@Path("/detail")
 	public ActionResult detail(){
 		int type = ParamHelper.getInt(beat, "type", 0); // 审核类型  1.房抵资料报送 2.垫资
-		long id = ParamHelper.getLong(beat, "id", 0);
+		long id = ParamHelper.getLong(beat, "Id", 0);
 		try {
 			AuditInterface audit = auditService.getAudit(type, id);
 			List<Image> images = imageBLL.getByType(type, id);
@@ -165,9 +166,9 @@ public class AuditMangeController extends BaseController{
 			e.printStackTrace();
 		}
 		if(type==1){
-			return ActionResult.view("/house/detail");			
+			return ActionResult.view("/housedetail");			
 		}else{
-			return ActionResult.view("/money/detail");
+			return ActionResult.view("/moneydetail");
 		}
 		
 		
