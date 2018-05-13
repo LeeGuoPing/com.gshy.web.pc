@@ -6,7 +6,7 @@ import com.bj58.wf.mvc.annotation.Path;
 
 public class IndexController extends BaseController{
 	
-	@Path("/index")
+	@Path("/")
 	public ActionResult index(){
 		return ActionResult.view("/index");
 	}
