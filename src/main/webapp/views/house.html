@@ -33,7 +33,7 @@
                                     <label class="col-sm-4 control-label">员工ID</label>
 
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" name="createId" placeholder="请输入员工ID" value=$!{vo.createName}>
+                                        <input type="text" class="form-control" name="createId" placeholder="请输入员工ID" value=#if($!{vo.createId} !=0)$!{vo.createId}#else#end>
                                     </div>
                                 </div>
                                 <div class="form-group col-xs-8">
@@ -147,8 +147,8 @@
         //日期范围限制
         var start = {
             elem: '#start',
-            format: 'YYYY/MM/DD',
-            min: laydate.now(), //设定最小日期为当前日期
+            format: 'YYYY-MM-DD',
+            min: "2008-05-13", //设定最小日期为当前日期
             max: '2099-06-16 23:59:59', //最大日期
             istime: false,
             istoday: false,
@@ -159,8 +159,8 @@
         };
         var end = {
             elem: '#ending',
-            format: 'YYYY/MM/DD',
-            min: laydate.now(),
+            format: 'YYYY-MM-DD',
+            min: "2008-05-13",
             max: '2099-06-16 23:59:59',
             istime: false,
             istoday: false,

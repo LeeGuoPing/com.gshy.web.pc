@@ -2,6 +2,7 @@ package com.bj58.web.pc.controllers;
 
 import java.util.List;
 
+import com.alibaba.fastjson.JSON;
 import com.bj58.web.pc.vo.AdvanceMoneySearchVO;
 import com.bj58.web.pc.vo.MortgageSearchVO;
 import com.bj58.wf.mvc.ActionResult;
@@ -28,7 +29,9 @@ public class AuditMangeController extends BaseController{
 	public ActionResult mortgageList(){
 		try {
 			MortgageSearchVO vo = VOInitHelper.initVO(beat, MortgageSearchVO.class);
+			log.info("vo is {}" + JSON.toJSONString(vo));
 			MortgageQuery query = vo.query();
+			log.info("query is {}" + JSON.toJSONString(query));
 			MortgageQuery waitQuery = vo.countQuery(AuditStatusEnum.AuditWait.getValue());
 			MortgageQuery successQuery = vo.countQuery(AuditStatusEnum.AuditSuccess.getValue());
 			MortgageQuery failQuery = vo.countQuery(AuditStatusEnum.AuditFail.getValue());
@@ -68,7 +71,9 @@ public class AuditMangeController extends BaseController{
 	public ActionResult advanceList(){
 		try {
 			AdvanceMoneySearchVO vo = VOInitHelper.initVO(beat, AdvanceMoneySearchVO.class);
+			log.info("vo is {}" + JSON.toJSONString(vo));
 			AdvanceMoneyQuery query = vo.query();
+			log.info("query is {}" + JSON.toJSONString(query));
 			AdvanceMoneyQuery waitQuery = vo.countQuery(AuditStatusEnum.AuditWait.getValue());
 			AdvanceMoneyQuery successQuery = vo.countQuery(AuditStatusEnum.AuditSuccess.getValue());
 			AdvanceMoneyQuery failQuery = vo.countQuery(AuditStatusEnum.AuditFail.getValue());

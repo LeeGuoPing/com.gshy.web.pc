@@ -15,7 +15,7 @@ public class MortgageSearchVO {
 	
 	EmployeeBLL employeeBLL = new EmployeeBLL();
 	
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
 	private int auditState;
 	
