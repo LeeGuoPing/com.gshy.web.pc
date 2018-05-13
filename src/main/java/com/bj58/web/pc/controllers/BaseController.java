@@ -12,6 +12,7 @@ import com.bj58.ycs.tool.webutil.tools.Md5Helper;
 import com.bj58.ycs.tool.webutil.tools.NumberTool;
 import com.gshy.web.service.bll.AdvanceMoneyBLL;
 import com.gshy.web.service.bll.EmployeeBLL;
+import com.gshy.web.service.bll.ImageBLL;
 import com.gshy.web.service.bll.MortgageBLL;
 import com.gshy.web.service.entity.Employee;
 
@@ -24,6 +25,8 @@ public class BaseController extends MvcController{
 	protected static final MortgageBLL mortgageBLL = new MortgageBLL();
 	
 	protected static final AdvanceMoneyBLL advanceMoneyBLL = new AdvanceMoneyBLL();
+	
+	protected static final ImageBLL imageBLL = new ImageBLL();
 	
 	protected static final Map<Long,Employee> employeeMap = new HashMap<Long, Employee>();
 	

@@ -16,6 +16,7 @@ import com.bj58.ycs.tool.webutil.tools.ParamHelper;
 import com.bj58.ycs.tool.webutil.tools.VOInitHelper;
 import com.gshy.web.service.entity.AdvanceMoney;
 import com.gshy.web.service.entity.AuditInterface;
+import com.gshy.web.service.entity.Image;
 import com.gshy.web.service.entity.Mortgage;
 import com.gshy.web.service.enums.AuditStatusEnum;
 import com.gshy.web.service.interceptors.Login;
@@ -25,6 +26,7 @@ import com.gshy.web.service.query.MortgageQuery;
 @Login
 @Path("/audit")
 public class AuditMangeController extends BaseController{
+	
 	/**
 	 * 房抵资料报送
 	 */
@@ -55,7 +57,7 @@ public class AuditMangeController extends BaseController{
 			model.add("waitCount",waitCount);
 			model.add("successCount",successCount);
 			model.add("failcount",failcount);
-			model.add("employeeMap",employeeMap);
+			model.add("employeeMap",getAllEmployee());
 						
 			model.add("pageTool", PageTool.getInstance().page2(beat.getClient().getRelativeUrl(), query.getPage(),
 					query.getPageSize(), count, vo.paramMap()));
@@ -96,6 +98,7 @@ public class AuditMangeController extends BaseController{
 			model.add("waitCount",waitCount);
 			model.add("successCount",successCount);
 			model.add("failcount",failcount);
+			model.add("employeeMap",getAllEmployee());
 			model.add("pageTool", PageTool.getInstance().page2(beat.getClient().getRelativeUrl(), query.getPage(),
 					query.getPageSize(), count, vo.paramMap()));
 			
@@ -146,5 +149,27 @@ public class AuditMangeController extends BaseController{
 			e.printStackTrace();
 		}
 		return new ActionResult4JSON("{\"ret\":\"-1\",\"msg\":\"fail!\"}");
+	}
+	
+	@Path("/detail")
+	public ActionResult detail(){
+		int type = ParamHelper.getInt(beat, "type", 0); // 审核类型  1.房抵资料报送 2.垫资
+		long id = ParamHelper.getLong(beat, "id", 0);
+		try {
+			AuditInterface audit = auditService.getAudit(type, id);
+			List<Image> images = imageBLL.getByType(type, id);
+			beat.getModel().add(audit);
+			beat.getModel().add(images);
+			beat.getModel().add("employeeMap",getAllEmployee());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(type==1){
+			return ActionResult.view("/house/detail");			
+		}else{
+			return ActionResult.view("/money/detail");
+		}
+		
+		
 	}
 }
