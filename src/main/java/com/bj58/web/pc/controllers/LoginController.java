@@ -12,11 +12,6 @@ import com.gshy.web.service.entity.Employee;
 @Path("/login")
 public class LoginController extends BaseController{
 	
-	@Path("/login")
-	public ActionResult index(){
-		return ActionResult.view("/login");
-	}
-	
 	@Path("/fast")
 	@POST
 	public ActionResult fastLogin(){
@@ -33,7 +28,7 @@ public class LoginController extends BaseController{
 				Cookie cookie = new Cookie("uid", emp.getId()+"");
 				cookie.setMaxAge(-1); // 关闭浏览器失效
 				beat.getResponse().addCookie(cookie);
-				return ActionResult.redirect("/");
+				return ActionResult.redirect("/index");
 			} 
 		} catch (Exception e) {
 			e.printStackTrace();

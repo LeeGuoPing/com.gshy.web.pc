@@ -97,10 +97,10 @@
                                     	</td>
                                     <td>
                                     	 #if($!{mortgage.auditState}==0)
-                                        <button type="button" class="btn btn-w-m btn-info auditing">审核</button>
+                                        <button type="button" class="btn btn-w-m btn-info auditing" data-id="$!{advanceMoney.id}" data-type="2">审核</button>
                                         #else
                                         #end
-                                        <a class="btn btn-w-m btn-primary" href="">查看详情</a>
+                                        <a class="btn btn-w-m btn-primary" href="" >查看详情</a>
                                     </td>
                                 </tr>
                               #end
@@ -158,8 +158,8 @@
         //日期范围限制
         var start = {
             elem: '#start',
-            format: 'YYYY/MM/DD',
-            min: laydate.now(), //设定最小日期为当前日期
+            format: 'YYYY-MM-DD',
+            min: "2008-01-01", //设定最小日期为当前日期
             max: '2099-06-16 23:59:59', //最大日期
             istime: false,
             istoday: false,
@@ -170,8 +170,8 @@
         };
         var end = {
             elem: '#ending',
-            format: 'YYYY/MM/DD',
-            min: laydate.now(),
+            format: 'YYYY-MM-DD',
+            min: "2008-01-01",
             max: '2099-06-16 23:59:59',
             istime: false,
             istoday: false,
@@ -197,7 +197,13 @@
                     },
                     function (isConfirm) {
                         if (isConfirm) {
-                            swal("删除成功！", "您已经永久删除了这条信息。", "success");
+                        	$.post('/audit/pass',{type:type,id:id},function(result){
+                        		if(result.ret==1){
+                        			 swal("操作成功！", "您已经了操作这条信息。", "success");
+                        		}else{
+                        			 swal("操作失败！", "请重新操作", "error");
+                        		}
+                        	});
                         } else {
                             swal("已取消", "您取消了删除操作！", "error");
                         }

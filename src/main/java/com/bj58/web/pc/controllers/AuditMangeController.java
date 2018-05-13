@@ -8,6 +8,7 @@ import com.bj58.web.pc.vo.MortgageSearchVO;
 import com.bj58.wf.mvc.ActionResult;
 import com.bj58.wf.mvc.BeatContext.Model;
 import com.bj58.wf.mvc.annotation.GET;
+import com.bj58.wf.mvc.annotation.POST;
 import com.bj58.wf.mvc.annotation.Path;
 import com.bj58.ycs.tool.webutil.actionresult.ActionResult4JSON;
 import com.bj58.ycs.tool.webutil.tools.PageTool;
@@ -105,6 +106,7 @@ public class AuditMangeController extends BaseController{
 	}
 		
 	@Path("/pass")
+	@POST
 	public ActionResult pass(){
 		try {
 			int type = ParamHelper.getInt(beat, "type", 0); // 审核类型  1.房抵资料报送 2.垫资

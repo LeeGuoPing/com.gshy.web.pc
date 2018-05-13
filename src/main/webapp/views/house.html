@@ -97,7 +97,7 @@
                                     	</td>
                                     <td>
                                     #if($!{mortgage.auditState}==0)
-                                        <button type="button" class="btn btn-w-m btn-info auditing">审核</button>
+                                        <button type="button" class="btn btn-w-m btn-info auditing" data-id="$!{mortgage.id}" data-type="1">审核</button>
                                     #else
                                     #end
                                         <a class="btn btn-w-m btn-primary" href="">查看详情</a>
@@ -172,7 +172,11 @@
         laydate(end);
         //弹出框
         $(document).ready(function () {
-            $('.auditing').click(function () {
+            $('.auditing').click(function (e) {
+            	e=e||window.event;
+            	e.preventDefault?e.preventDefault():(e.returnValue=false);
+            	var type=$(this).data('type');
+            	var id=$(this).data('id');
                 swal({
                         title: "您确定要操作这条信息吗",
                         text: "审核后将无法恢复，请谨慎操作！",
@@ -186,7 +190,15 @@
                     },
                     function (isConfirm) {
                         if (isConfirm) {
-                            swal("操作成功！", "您已经了操作这条信息。", "success");
+                        	
+                        	$.post('/audit/pass',{type:type,id:id},function(result){
+                        		if(result.ret==1){
+                        			 swal("操作成功！", "您已经了操作这条信息。", "success");
+                        		}else{
+                        			 swal("操作失败！", "请重新操作", "error");
+                        		}
+                        	})
+                           
                         } else {
                             swal("已取消", "您取消了审核操作！", "error");
                         }
