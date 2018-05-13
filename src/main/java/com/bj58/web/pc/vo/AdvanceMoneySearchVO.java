@@ -101,6 +101,7 @@ public class AdvanceMoneySearchVO {
 		if(StringUtils.isNotBlank(createTimeEnd)){
 			createTimeRange.setEnd(sdf.parse(createTimeEnd+" 23:59:59"));
 		}
+		builder.addCreateTime(createTimeRange);
 		builder.setPage(page);
 		builder.setPageSize(pageSize);
 		return builder.build();

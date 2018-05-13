@@ -102,6 +102,7 @@ public class MortgageSearchVO {
 		if(pageSize<=0){
 			pageSize=20;
 		}
+		builder.setCreateTime(createTimeRange);
 		builder.setPage(page);
 		builder.setPageSize(pageSize);
 		return builder.build();
