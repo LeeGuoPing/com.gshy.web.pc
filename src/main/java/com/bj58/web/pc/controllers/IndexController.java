@@ -9,6 +9,6 @@ public class IndexController extends BaseController{
 	
 	@Path("/")
 	public ActionResult index(){
-		return ActionResult.view("/login");
+		return ActionResult.view("/index");
 	}
 }

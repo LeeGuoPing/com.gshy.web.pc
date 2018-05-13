@@ -9,10 +9,14 @@ import com.bj58.ycs.tool.webutil.actionresult.ActionResult4JSON;
 import com.bj58.ycs.tool.webutil.tools.ParamHelper;
 import com.gshy.web.service.entity.Employee;
 
-@Path("/login")
 public class LoginController extends BaseController{
 	
-	@Path("/fast")
+	@Path("/login")
+	public ActionResult index(){
+		return ActionResult.view("/login");
+	}
+	
+	@Path("/login/fast")
 	@POST
 	public ActionResult fastLogin(){
 		try {
