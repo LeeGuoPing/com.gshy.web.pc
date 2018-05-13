@@ -8,7 +8,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.bj58.ycs.tool.webutil.query.DateRange;
 import com.gshy.web.service.bll.EmployeeBLL;
-import com.gshy.web.service.entity.Employee;
 import com.gshy.web.service.query.MortgageQuery;
 import com.gshy.web.service.query.MortgageQuery.MortgageQueryBuilder;
 
@@ -20,7 +19,7 @@ public class MortgageSearchVO {
 	
 	private int auditState;
 	
-	private String createName;
+	private long createId;
 	
 	private String createTimeStart;
 	
@@ -38,8 +37,20 @@ public class MortgageSearchVO {
 		this.auditState = auditState;
 	}
 
-	public String getCreateName() {
-		return createName;
+	public long getCreateId() {
+		return createId;
+	}
+
+	public void setCreateId(long createId) {
+		this.createId = createId;
+	}
+
+	public void setCreateTimeStart(String createTimeStart) {
+		this.createTimeStart = createTimeStart;
+	}
+
+	public void setCreateTimeEnd(String createTimeEnd) {
+		this.createTimeEnd = createTimeEnd;
 	}
 
 	public String getCreateTimeStart() {
@@ -75,12 +86,8 @@ public class MortgageSearchVO {
 		if(auditState>0){
 			builder.addAuditState(auditState);
 		}
-		System.out.println("createName: "+createName);
-		if(StringUtils.isNotBlank(createName)){
-			Employee employee = employeeBLL.getByName(createName);
-			if(employee!=null){
-				builder.addCreateEmp(employee.getId());
-			}
+		if (createId !=0) {
+			builder.addCreateEmp(createId);
 		}
 		DateRange createTimeRange = new DateRange();
 		if(StringUtils.isNotBlank(createTimeStart)){
