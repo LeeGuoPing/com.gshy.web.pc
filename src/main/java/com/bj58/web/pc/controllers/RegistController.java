@@ -9,7 +9,9 @@ import com.bj58.wf.mvc.annotation.Path;
 import com.bj58.ycs.tool.webutil.actionresult.ActionResult4JSON;
 import com.bj58.ycs.tool.webutil.tools.ParamHelper;
 import com.gshy.web.service.entity.Employee;
+import com.gshy.web.service.interceptors.Login;
 
+@Login
 @Path("/regist")
 public class RegistController extends BaseController{
 	

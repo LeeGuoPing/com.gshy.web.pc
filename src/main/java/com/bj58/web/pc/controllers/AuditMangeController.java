@@ -16,9 +16,11 @@ import com.gshy.web.service.entity.AdvanceMoney;
 import com.gshy.web.service.entity.AuditInterface;
 import com.gshy.web.service.entity.Mortgage;
 import com.gshy.web.service.enums.AuditStatusEnum;
+import com.gshy.web.service.interceptors.Login;
 import com.gshy.web.service.query.AdvanceMoneyQuery;
 import com.gshy.web.service.query.MortgageQuery;
 
+@Login
 @Path("/audit")
 public class AuditMangeController extends BaseController{
 	/**
