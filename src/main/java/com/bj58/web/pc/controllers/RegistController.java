@@ -13,8 +13,13 @@ import com.gshy.web.service.entity.Employee;
 @Path("/regist")
 public class RegistController extends BaseController{
 	
+	@Path("/add")
+	public ActionResult addEmp() {
+		return ActionResult.view("addemp");
+	}
 	
-	@Path("list")
+	
+	@Path("/list")
 	public ActionResult registList(){
 		try {
 			List<Employee> employees = employeeBLL.getAllEmployeeValid();
@@ -71,6 +76,7 @@ public class RegistController extends BaseController{
 	 * 离职
 	 */
 	@Path("/remove")
+	@POST
 	public ActionResult remove(long empId){
 		try {
 			Employee emp = employeeBLL.getById(empId);

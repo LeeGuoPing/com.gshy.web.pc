@@ -1,16 +1,12 @@
  <!DOCTYPE html>
 <html>
-
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
     <title>后台管理中心-主页</title>
     <meta name="keywords" content="后台管理中心">
-
-    <link rel="shortcut icon" href="favicon.ico"> <link href="http://static.haoyejinfu.com:8088/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico"> 
+    <link href="http://static.haoyejinfu.com:8088/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="http://static.haoyejinfu.com:8088/css/font-awesome.css?v=4.4.0" rel="stylesheet">
     <link href="http://static.haoyejinfu.com:8088/css/plugins/iCheck/custom.css" rel="stylesheet">
     <link href="http://static.haoyejinfu.com:8088/css/animate.css" rel="stylesheet">
@@ -78,8 +74,7 @@
                                     <td>$!{employee.email}</td>
                                     <td>$!{dateTool.formatISODatetime($!{employee.addTime})}</td>
                                     <td>
-                                        <button type="button" class="btn btn-w-m btn-info auditing">新增</button>
-                                        <a class="btn btn-w-m btn-primary" href="/regist/remove?empId=$!{employee.id}">删除</a>
+                                        <a class="btn btn-w-m btn-primary auditing" href="/regist/remove?empId=$!{employee.id}">删除</a>
                                     </td>
                                 </tr>
                               #end
@@ -127,38 +122,13 @@
     </script>
     <!-- Sweet alert -->
     <script src="http://static.haoyejinfu.com:8088/js/plugins/sweetalert/sweetalert.min.js"></script>
-    <!-- layerDate plugin javascript -->
-    <script src="http://static.haoyejinfu.com:8088/js/plugins/layer/laydate/laydate.js"></script>
     <script>
-        //日期范围限制
-        var start = {
-            elem: '#start',
-            format: 'YYYY/MM/DD',
-            min: laydate.now(), //设定最小日期为当前日期
-            max: '2099-06-16 23:59:59', //最大日期
-            istime: false,
-            istoday: false,
-            choose: function (datas) {
-                end.min = datas; //开始日选好后，重置结束日的最小日期
-                end.start = datas //将结束日的初始值设定为开始日
-            }
-        };
-        var end = {
-            elem: '#ending',
-            format: 'YYYY/MM/DD',
-            min: laydate.now(),
-            max: '2099-06-16 23:59:59',
-            istime: false,
-            istoday: false,
-            choose: function (datas) {
-                start.max = datas; //结束日选好后，重置开始日的最大日期
-            }
-        };
-        laydate(start);
-        laydate(end);
         //弹出框
         $(document).ready(function () {
-            $('.auditing').click(function () {
+            $('.auditing').click(function (e) {
+            	e=e||window.event;
+            	e.preventDefault?e.preventDefault():(e.returnValue=false);
+            	var getUrl=this.href;
                 swal({
                         title: "您确定要删除此员工吗?",
                         text: "删除后将无法恢复，请谨慎操作！",
@@ -172,7 +142,13 @@
                     },
                     function (isConfirm) {
                         if (isConfirm) {
-                            swal("删除成功！", "您已经永久删除了此员工。", "success");
+                        	$.post(getUrl,function(result){
+                        		if(result.ret==1){
+                        			swal("删除成功！", "您已经永久删除了此员工。", "success");
+                        		}else{
+                        			swal("删除失败", "请重试", "error");
+                        		}
+                        	});
                         } else {
                             swal("已取消", "您取消了删除操作！", "error");
                         }
