@@ -32,7 +32,7 @@ public class LoginController extends BaseController{
 				Cookie cookie = new Cookie("uid", emp.getId()+"");
 				cookie.setMaxAge(-1); // 关闭浏览器失效
 				beat.getResponse().addCookie(cookie);
-				return ActionResult.redirect("/index");
+				return ActionResult.redirect("http://admin.haoyejinfu.com:8088/");
 			} 
 		} catch (Exception e) {
 			e.printStackTrace();
