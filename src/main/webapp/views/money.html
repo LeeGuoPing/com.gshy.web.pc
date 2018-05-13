@@ -65,7 +65,7 @@
                                     <th>上家名称</th>
                                     <th>下家名称</th>
                                     <th>垫资情况</th>
-                                    <th>一低/二抵</th>
+                                    <th>一抵/二抵</th>
                                     <th>本次借款</th>
                                     <th>创建人</th>
                                     <th>创建时间</th>
@@ -100,7 +100,7 @@
                                         <button type="button" class="btn btn-w-m btn-info auditing" data-id="$!{advanceMoney.id}" data-type="2">审核</button>
                                         #else
                                         #end
-                                        <a class="btn btn-w-m btn-primary" href="" >查看详情</a>
+                                        <a class="btn btn-w-m btn-primary" href="/audit/detail?type=2&Id=$!{advanceMoney.id}" >查看详情</a>
                                     </td>
                                 </tr>
                               #end
