@@ -11,4 +11,9 @@ public class IndexController extends BaseController{
 	public ActionResult index(){
 		return ActionResult.view("/index");
 	}
+	
+	@Path("/home")
+	public ActionResult home(){
+		return ActionResult.view("/home");
+	}
 }

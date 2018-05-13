@@ -11,11 +11,6 @@ import com.gshy.web.service.entity.Employee;
 
 public class LoginController extends BaseController{
 	
-	@Path("/login")
-	public ActionResult index(){
-		return ActionResult.view("/login");
-	}
-	
 	@Path("/login/fast")
 	@POST
 	public ActionResult fastLogin(){
