@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>浩业金服- 注册</title>
+    <meta name="keywords" content="浩业金服-后台">
+    <link rel="shortcut icon" href="favicon.ico"> <link href="http://static.haoyejinfu.com:8088/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="http://static.haoyejinfu.com:8088/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="http://static.haoyejinfu.com:8088/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="http://static.haoyejinfu.com:8088/css/animate.css" rel="stylesheet">
+    <link href="http://static.haoyejinfu.com:8088/css/style.css?v=4.1.0" rel="stylesheet">
+    <style type="text/css">
+    .form-group{position:relative;margin-bottom:24px;}
+    .form-group p{position:absolute;left:0;margin:5px 0 0 0;text-indent:12px;color:#fe552e;display:none;}
+    .m-b{margin-bottom:0;}
+    </style>
+</head>
+<body class="gray-bg">
+    <div class="middle-box text-center loginscreen   animated fadeInDown">
+        <div>
+            <h3>浩业金服</h3>
+            <p>创建新账户</p>
+            <form class="m-t" role="form" id="from" action="/regist/fast">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="请输入用户名" name="userName" id="userName">
+                    <p>请输入用户名</p>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="请输入电话号码" name="phone" id="phone">
+                    <p>电话号码未输入或输入错误</p>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="请输入邮箱" name="email" id="email">
+                    <p>邮箱未输入或输入错误</p>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="请输入密码" name="password" id="password">
+                    <p>密码输入过长或太短</p>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="请再次输入密码" name="password" id="repass">
+                     <p>密码输入过长或太短</p>
+                </div>
+                 <div class="form-group">
+                    <button type="submit" class="btn btn-primary block full-width m-b" id="submit">注 册</button>
+                    <p></p>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- 全局js -->
+    <script src="http://static.haoyejinfu.com:8088/js/jquery.min.js?v=2.1.4"></script>
+    <script src="http://static.haoyejinfu.com:8088/js/bootstrap.min.js?v=3.3.6"></script>
+    <!-- iCheck -->
+    <script src="http://static.haoyejinfu.com:8088/js/plugins/iCheck/icheck.min.js"></script>
+    <script type="text/javascript" src="http://static.haoyejinfu.com:8088/js/md5.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+        $('#from').on('input  propertychange change blur','input',function(e){
+          e=e||window.evnent;
+          e.preventDefault?e.preventDefault():(e.returnValue=false);
+          var target=e.target||e.srcElement;
+          var id=target.id;
+          var value=$.trim(target.value);
+          var isNull=false;
+          switch(id){
+            case 'userName': 
+              if(!value){
+                isNull=true;
+              }
+              break;
+            case 'email':
+              if(!/^(\w+\.?)*\w+@(?:\w+\.)\w+$/.test(value)){
+                   isNull=true;
+              }
+            break;
+            case 'phone':
+              if(!/^1[0-9]{10}/.test(value)){
+                   isNull=true;
+              }
+            break;
+            case 'password':
+              if(value.length<6||value.length>20){
+                   isNull=true;
+              }
+            break;
+            case 'repass':
+            if(value.length<6||value.length>20){
+                   isNull=true;
+              }
+            break;
+          }
+          if(isNull){
+            $(target).next().show();
+          }else{
+           $(target).next().hide();
+          }
+        });
+
+
+        var isClick=false;
+        $('#submit').click(function(e){
+          e=e||window.evnent;
+          e.preventDefault?e.preventDefault():(e.returnValue=false);
+          if(isClick){return;}
+          var userName=$.trim(document.getElementById('userName').value);
+          var phone=$.trim(document.getElementById('phone').value);
+          var email=$.trim(document.getElementById('email').value);
+          var password=$.trim(document.getElementById('password').value);
+          var repass=$.trim(document.getElementById('repass').value);
+
+          if(!userName){
+            $("#userName").next().show();
+            isClick=false;
+            return false;
+          }
+          if(!/^1[0-9]{10}/.test(phone)){
+            $("#phone").next().show();
+            isClick=false;
+            return false;
+          }
+          if(!/^(\w+\.?)*\w+@(?:\w+\.)\w+$/.test(email)){
+            $("#email").next().show();
+            isClick=false;
+            return false;
+          }
+          if(password.length<6||password.length>20){
+            $("#password").next().show();
+            isClick=false;
+            return false;
+          }
+          if(repass.length<6||repass.length>20){
+            $("#repass").next().show();
+            isClick=false;
+            return false;
+          }
+          if(password!=repass){
+            $(this).next().html('两次密码不一致').show();
+            isClick=false;
+            return false;
+          }else{
+            $(this).next().html('').hide();
+          }
+
+          var psd=hex_md5(hex_md5(password));
+          $.post('/regist/fast',{userName:userName,phone:phone,email:email,password:psd},function(result){
+            if(result.ret==1){
+              alert('添加成功');
+              location.reload(true);
+            }else{
+              alert('添加失败');
+            }
+            isClick=false;
+          })
+        });
+    </script>
+
+</body>
+
+</html>

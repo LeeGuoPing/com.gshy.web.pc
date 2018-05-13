@@ -15,7 +15,7 @@ public class RegistController extends BaseController{
 	
 	@Path("/add")
 	public ActionResult addEmp() {
-		return ActionResult.view("addemp");
+		return ActionResult.view("/addemp");
 	}
 	
 	
