@@ -145,6 +145,7 @@
                         	$.post(getUrl,function(result){
                         		if(result.ret==1){
                         			swal("删除成功！", "您已经永久删除了此员工。", "success");
+                        			location.reload();
                         		}else{
                         			swal("删除失败", "请重试", "error");
                         		}

@@ -77,8 +77,10 @@ public class RegistController extends BaseController{
 	 */
 	@Path("/remove")
 	@POST
-	public ActionResult remove(long empId){
+	public ActionResult remove(){
 		try {
+			long empId = ParamHelper.getLong(beat, "empId", 0L);
+			log.info("员工id is {}" + empId);
 			Employee emp = employeeBLL.getById(empId);
 			if(emp==null){
 				return new ActionResult4JSON("{\"ret\":\"-1\",\"msg\":\"此用户不存在!\"}");
