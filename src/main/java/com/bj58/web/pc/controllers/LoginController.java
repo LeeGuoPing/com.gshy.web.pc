@@ -31,6 +31,8 @@ public class LoginController extends BaseController{
 			if (password.equals(dataPassword)) {
 				Cookie cookie = new Cookie("uid", emp.getId()+"");
 				cookie.setMaxAge(-1); // 关闭浏览器失效
+				cookie.setPath("/");
+				cookie.setMaxAge(24*60*60);
 				beat.getResponse().addCookie(cookie);
 				return new ActionResult4JSON("{\"ret\":\"1\",\"msg\":\"success!\"}");
 			} 
