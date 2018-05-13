@@ -132,6 +132,7 @@ public class AuditMangeController extends BaseController{
 	}
 	
 	@Path("/refuse")
+	@POST
 	public ActionResult refuse(){
 		try {
 			int type = ParamHelper.getInt(beat, "type", 0); // 审核类型  1.房抵资料报送 2.垫资
