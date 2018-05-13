@@ -7,19 +7,17 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
 import com.bj58.ycs.tool.webutil.query.DateRange;
-import com.gshy.web.service.bll.EmployeeBLL;
-import com.gshy.web.service.entity.Employee;
 import com.gshy.web.service.query.AdvanceMoneyQuery;
 import com.gshy.web.service.query.AdvanceMoneyQuery.AdvanceMoneyQueryBuilder;
 
 public class AdvanceMoneySearchVO {
 	
-	EmployeeBLL employeeBLL = new EmployeeBLL();
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+	
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
 	private int auditState;
 	
-	private String createName;
+	private long createId;
 	
 	private String createTimeStart;
 	
@@ -36,13 +34,13 @@ public class AdvanceMoneySearchVO {
 	public void setAuditState(int auditState) {
 		this.auditState = auditState;
 	}
-	
-	public String getCreateName() {
-		return createName;
+
+	public long getCreateId() {
+		return createId;
 	}
 
-	public void setCreateName(String createName) {
-		this.createName = createName;
+	public void setCreateId(long createId) {
+		this.createId = createId;
 	}
 
 	public String getCreateTimeStart() {
@@ -93,11 +91,8 @@ public class AdvanceMoneySearchVO {
 		if(pageSize<=0){
 			pageSize=20;
 		}
-		if(StringUtils.isNotBlank(createName)){
-			Employee employee = employeeBLL.getByName(createName);
-			if(employee!=null){
-				builder.addCreateEmp(employee.getId());
-			}
+		if(createId !=0){
+			builder.addCreateEmp(createId);
 		}
 		DateRange createTimeRange = new DateRange();
 		if(StringUtils.isNotBlank(createTimeStart)){
