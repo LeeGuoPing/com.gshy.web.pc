@@ -3,7 +3,7 @@ package com.bj58.web.pc.controllers;
 import javax.servlet.http.Cookie;
 
 import com.bj58.wf.mvc.ActionResult;
-import com.bj58.wf.mvc.annotation.GET;
+import com.bj58.wf.mvc.annotation.POST;
 import com.bj58.wf.mvc.annotation.Path;
 import com.bj58.ycs.tool.webutil.actionresult.ActionResult4JSON;
 import com.bj58.ycs.tool.webutil.tools.ParamHelper;
@@ -13,7 +13,7 @@ import com.gshy.web.service.entity.Employee;
 public class LoginController extends BaseController{
 	
 	@Path("/fast")
-	@GET
+	@POST
 	public ActionResult fastLogin(){
 		try {
 			String email = ParamHelper.getString(beat, "email", "").trim();

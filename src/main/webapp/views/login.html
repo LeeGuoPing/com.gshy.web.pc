@@ -1,17 +1,11 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-    <title>浩业金服登录界面</title>
-    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
-    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
-
-    <link rel="shortcut icon" href="favicon.ico"> 
+    <title>浩业金服 - 登录</title>
+    <meta name="keywords" content="浩业金服后台">
+    <link rel="shortcut icon" href="favicon.ico">
     <link href="http://static.haoyejinfu.com:8088/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="http://static.haoyejinfu.com:8088/css/font-awesome.css?v=4.4.0" rel="stylesheet">
 
@@ -20,7 +14,11 @@
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
-    <script>if(window.top !== window.self){ window.top.location = window.location;}</script>
+    <style type="text/css">
+    .form-group{position:relative;margin-bottom:24px;}
+    .form-group p{position:absolute;left:0;margin:5px 0 0 0;text-indent:12px;color:#fe552e;display:none;}
+    .m-b{margin-bottom:0;}
+    </style>
 </head>
 
 <body class="gray-bg">
@@ -28,25 +26,24 @@
     <div class="middle-box text-center loginscreen  animated fadeInDown">
         <div>
             <div>
-
-                <h1 class="logo-name">H+</h1>
-
+                <h1 class="logo-name"><img src="http://static.haoyejinfu.com:8088/img/login.png"></h1>
             </div>
-            <h3>欢迎使用浩业金服后台</h3>
-
-            <form class="m-t" role="form" action="index.html">
+            <h3>浩业金服后台管理系统</h3>
+            <form class="m-t" role="form" action="index.html" id="from">
                 <div class="form-group">
-                    <input type="email" class="form-control" placeholder="用户名" required="">
+                    <input type="email" class="form-control" placeholder="邮箱" required="" id="email">
+                    <p>邮箱未输入或输入错误</p>
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="密码" required="">
+                    <input type="password" class="form-control" placeholder="密码" required="" id="password">
+                    <p>密码输入过长或太短</p>
                 </div>
-                <button type="submit" class="btn btn-primary block full-width m-b">登 录</button>
-
-
-          <!--  <p class="text-muted text-center"> <a href="login.html#"><small>忘记密码了？</small></a> | <a href="register.html">注册一个新账号</a>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary block full-width m-b" id="submit">登 录</button>
+                   <p></p>
+                </div>
+               <!--  <p class="text-muted text-center"> <a href="login.html#"><small>忘记密码了？</small></a> | <a href="register.html">注册一个新账号</a> -->
                 </p>
--->
             </form>
         </div>
     </div>
@@ -54,8 +51,64 @@
     <!-- 全局js -->
     <script src="http://static.haoyejinfu.com:8088/js/jquery.min.js?v=2.1.4"></script>
     <script src="http://static.haoyejinfu.com:8088/js/bootstrap.min.js?v=3.3.6"></script>
-
-
+    <script type="text/javascript" src="http://static.haoyejinfu.com:8088/js/md5.js"></script>
+    <script type="text/javascript">
+     $('#from').on('input  propertychange change blur','input',function(e){
+          e=e||window.evnent;
+          e.preventDefault?e.preventDefault():(e.returnValue=false);
+          var target=e.target||e.srcElement;
+          var id=target.id;
+          var value=$.trim(target.value);
+          var isNull=false;
+          switch(id){
+            case 'email':
+              if(!/^(\w+\.?)*\w+@(?:\w+\.)\w+$/.test(value)){
+                   isNull=true;
+              }
+            break;
+            case 'password':
+              if(value.length<6||value.length>20){
+                   isNull=true;
+              }
+            break;
+          }
+          if(isNull){
+            $(target).next().show();
+          }else{
+           $(target).next().hide();
+          }
+        });
+    var isClick=false;
+      $('#submit').click(function(e){
+        e=e||window.event;
+        e.preventDefault?e.preventDefault():(e.returnValue=false);
+        if(isClick){return;}
+        isClick=true;
+        var email=$.trim(document.getElementById('email').value);
+        var password=$.trim(document.getElementById('password').value);
+        if(!/^(\w+\.?)*\w+@(?:\w+\.)\w+$/.test(email)){
+          $("#email").next().show();
+            isClick=false;
+            return false;
+        }
+        
+        if(password.length<6||password.length>20){
+          $("#password").next().show();
+            isClick=false;
+            return false;
+        }
+        
+        var psd=hex_md5(hex_md5(password));
+        $.post('/login/fast',{email:email,password:psd},function(result){
+            if(result.ret==1){
+              location.href="/";
+            }else{
+              alert('添加失败');
+            }
+            isClick=false;
+          })
+      });
+    </script>
 
 </body>
 
