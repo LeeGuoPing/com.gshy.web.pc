@@ -29,7 +29,7 @@
                 <h1 class="logo-name"><img src="/static/img/login.png"></h1>
             </div>
             <h3>浩业金服后台管理系统</h3>
-            <form class="m-t" role="form" action="index.html" id="from">
+            <form class="m-t" role="form" action="index.html" id="from" >
                 <div class="form-group">
                     <input type="email" class="form-control" placeholder="邮箱" required="" id="email">
                     <p>邮箱未输入或输入错误</p>
@@ -99,9 +99,9 @@
         }
         
         var psd=hex_md5(hex_md5(password));
-        $.post('/login/fast',{email:email,password:psd},function(result){
+        $.post('login/fast',{email:email,password:psd},function(result){
             if(result.ret==1){
-              location.href="/";
+              location.href="";
             }else{
               alert(result.msg);
             }
