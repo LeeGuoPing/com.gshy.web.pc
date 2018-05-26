@@ -101,7 +101,7 @@
         var psd=hex_md5(hex_md5(password));
         $.post('login/fast',{email:email,password:psd},function(result){
             if(result.ret==1){
-              location.href="";
+              location.href="/admin";
             }else{
               alert(result.msg);
             }

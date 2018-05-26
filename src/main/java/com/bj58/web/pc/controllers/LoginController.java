@@ -34,7 +34,7 @@ public class LoginController extends BaseController{
 				cookie.setPath("/");
 				cookie.setMaxAge(24*60*60);
 				beat.getResponse().addCookie(cookie);
-				return new ActionResult4JSON("{\"ret\":\"1\",\"msg\":\"success!\"}");
+				return new ActionResult4JSON("{\"ret\":\"1\",\"msg\":\"成功!\"}");
 			} 
 		} catch (Exception e) {
 			e.printStackTrace();
