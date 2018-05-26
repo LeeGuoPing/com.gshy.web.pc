@@ -107,7 +107,7 @@
                                        
                                         #else
                                         #end
-                                        <a class="btn btn-w-m btn-primary" href="/audit/detail?type=2&Id=$!{advanceMoney.id}" >查看详情</a>
+                                        <a class="btn btn-w-m btn-primary" href="detail?type=2&Id=$!{advanceMoney.id}" >查看详情</a>
                                     </td>
                                 </tr>
                               #end
@@ -204,7 +204,7 @@
                     },
                     function (isConfirm) {
                         if (isConfirm) {
-                        	$.post('/audit/pass',{type:type,id:id},function(result){
+                        	$.post('pass',{type:type,id:id},function(result){
                         		if(result.ret==1){
                         			 swal("操作成功！", "您已经了操作这条信息。", "success");
                         		}else{
@@ -236,7 +236,7 @@
                     function (isConfirm) {
                         if (isConfirm) {
                         	
-                        	$.post('/audit/refuse',{type:type,id:id},function(result){
+                        	$.post('refuse',{type:type,id:id},function(result){
                         		if(result.ret==1){
                         			 swal("操作成功！", "您已经了操作这条信息。", "success");
                         		}else{

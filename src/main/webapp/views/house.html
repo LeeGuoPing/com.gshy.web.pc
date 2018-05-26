@@ -31,7 +31,7 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-content">
                         <!-- 表单查询 -->
-                        <form action="/audit/mortgage/list" role="form" class="form row form-horizontal">
+                        <form action="list" role="form" class="form row form-horizontal">
                             <div class="row">
                                 <div class="form-group col-xs-4">
                                     <label class="col-sm-4 control-label">员工ID</label>
@@ -105,7 +105,7 @@
                                         <button type="button" class="btn btn-danger resufe" data-id="$!{mortgage.id}" data-type="1">审核驳回</button>
                                     #else
                                     #end
-                                        <a class="btn btn-w-m btn-primary" href="/audit/detail?type=1&Id=$!{mortgage.id}">查看详情</a>
+                                        <a class="btn btn-w-m btn-primary" href="detail?type=1&Id=$!{mortgage.id}">查看详情</a>
                                     </td>
                                 </tr>
                                 #end
@@ -196,7 +196,7 @@
                     function (isConfirm) {
                         if (isConfirm) {
                         	
-                        	$.post('/audit/pass',{type:type,id:id},function(result){
+                        	$.post('pass',{type:type,id:id},function(result){
                         		if(result.ret==1){
                         			 swal("操作成功！", "您已经了操作这条信息。", "success");
                         		}else{
@@ -230,7 +230,7 @@
                     function (isConfirm) {
                         if (isConfirm) {
                         	
-                        	$.post('/audit/refuse',{type:type,id:id},function(result){
+                        	$.post('refuse',{type:type,id:id},function(result){
                         		if(result.ret==1){
                         			 swal("操作成功！", "您已经了操作这条信息。", "success");
                         		}else{

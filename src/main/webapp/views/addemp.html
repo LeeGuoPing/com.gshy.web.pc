@@ -149,7 +149,7 @@
           }
 
           var psd=password;
-          $.post('/regist/fast',{userName:userName,phone:phone,email:email,password:psd},function(result){
+          $.post('fast',{userName:userName,phone:phone,email:email,password:psd},function(result){
             if(result.ret==1){
               alert('添加成功');
               location.reload(true);
