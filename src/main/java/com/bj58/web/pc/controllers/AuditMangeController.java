@@ -59,7 +59,7 @@ public class AuditMangeController extends BaseController{
 			model.add("failcount",failcount);
 			model.add("employeeMap",getAllEmployee());
 						
-			model.add("pageTool", PageTool.getInstance().page2(beat.getClient().getRelativeUrl(), query.getPage(),
+			model.add("pageTool", PageTool.getInstance().page2("admin/audit/mortgage/list", query.getPage(),
 					query.getPageSize(), count, vo.paramMap()));
 			
 		} catch (Exception e) {
@@ -100,7 +100,7 @@ public class AuditMangeController extends BaseController{
 			model.add("successCount",successCount);
 			model.add("failcount",failcount);
 			model.add("employeeMap",getAllEmployee());
-			model.add("pageTool", PageTool.getInstance().page2(beat.getClient().getRelativeUrl(), query.getPage(),
+			model.add("pageTool", PageTool.getInstance().page2("admin/audit/advance/list", query.getPage(),
 					query.getPageSize(), count, vo.paramMap()));
 			
 		} catch (Exception e) {
