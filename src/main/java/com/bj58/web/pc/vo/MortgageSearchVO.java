@@ -78,7 +78,7 @@ public class MortgageSearchVO {
 	}
 
 	public MortgageQuery query() throws Exception {
-		return countQuery(auditState);
+		return countQuery(-1);
 	}
 	
 	public MortgageQuery countQuery(int auditState) throws Exception{
@@ -102,7 +102,9 @@ public class MortgageSearchVO {
 		if(pageSize<=0){
 			pageSize=20;
 		}
-		builder.setCreateTime(createTimeRange);
+		if(createTimeRange.getBegin()!=null || createTimeRange.getEnd()!=null){
+			builder.setCreateTime(createTimeRange);			
+		}
 		builder.setPage(page);
 		builder.setPageSize(pageSize);
 		return builder.build();

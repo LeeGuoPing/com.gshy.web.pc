@@ -77,10 +77,10 @@ public class AdvanceMoneySearchVO {
 
 	public AdvanceMoneyQuery query() throws Exception {
 		
-		return countQuery(auditState);
+		return countQuery(-1);
 	}
 
-	public AdvanceMoneyQuery countQuery(int value) throws Exception {
+	public AdvanceMoneyQuery countQuery(int auditState) throws Exception {
 		AdvanceMoneyQueryBuilder builder = AdvanceMoneyQueryBuilder.builder();
 		if(auditState>0){
 			builder.addAuditState(auditState);
@@ -101,7 +101,9 @@ public class AdvanceMoneySearchVO {
 		if(StringUtils.isNotBlank(createTimeEnd)){
 			createTimeRange.setEnd(sdf.parse(createTimeEnd+" 23:59:59"));
 		}
-		builder.addCreateTime(createTimeRange);
+		if(createTimeRange.getBegin()!=null || createTimeRange.getEnd()!=null){
+			builder.addCreateTime(createTimeRange);			
+		}
 		builder.setPage(page);
 		builder.setPageSize(pageSize);
 		return builder.build();
