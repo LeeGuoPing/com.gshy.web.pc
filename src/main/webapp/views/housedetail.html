@@ -18,9 +18,11 @@
             <div class="col-sm-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-content">
+                   #foreach($image in $images)
                         <a class="fancybox" href="img/p1.jpg" title="图片1">
-                            <img alt="image" src="/static/img/p_big1.jpg" />
+                            <img alt="image" src="/static/img/$!{image.url}" />
                         </a>
+                  #end
                     </div>
                 </div>
             </div>
