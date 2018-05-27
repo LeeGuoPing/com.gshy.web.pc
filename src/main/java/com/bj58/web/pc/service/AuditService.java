@@ -20,20 +20,20 @@ public class AuditService {
 		return null;
 	}
 
-	public void pass(int type, long id) throws Exception {
+	public void pass(int type, long id,long auditEmp) throws Exception {
 		if(type==1){
-			mortgageBLL.pass(id);
+			mortgageBLL.pass(id,auditEmp);
 		}else if(type==2){
-			advanceMoneyBLL.pass(id);
+			advanceMoneyBLL.pass(id,auditEmp);
 		}
 		
 	}
 
-	public void fail(int type, long id) throws Exception {
+	public void fail(int type, long id,long auditEmp) throws Exception {
 		if(type==1){
-			mortgageBLL.fail(id);
+			mortgageBLL.fail(id,auditEmp);
 		}else if(type==2){
-			advanceMoneyBLL.fail(id);
+			advanceMoneyBLL.fail(id,auditEmp);
 		}
 		
 	}
