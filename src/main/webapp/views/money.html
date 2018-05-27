@@ -103,11 +103,11 @@
                                     <td>
                                     	 #if($!{advanceMoney.auditState}==0)
                                         <button type="button" class="btn btn-info auditing" data-id="$!{advanceMoney.id}" data-type="2">审核通过</button>
-                                        <button type="button" class="btn btn-danger auditing" data-id="$!{advanceMoney.id}" data-type="2">审核驳回</button>
+                                        <button type="button" class="btn btn-danger resufe" data-id="$!{advanceMoney.id}" data-type="2">审核驳回</button>
                                        
                                         #else
                                         #end
-                                        <a class="btn btn-w-m btn-primary" href="detail?type=2&Id=$!{advanceMoney.id}" >查看详情</a>
+                                        <a class="btn btn-w-m btn-primary" href="/admin/audit/detail?type=2&Id=$!{advanceMoney.id}" >查看详情</a>
                                     </td>
                                 </tr>
                               #end
@@ -190,7 +190,11 @@
         laydate(end);
         //弹出框
         $(document).ready(function () {
-            $('.auditing').click(function () {
+            $('.auditing').click(function (e) {
+            	e=e||window.event;
+            	e.preventDefault?e.preventDefault():(e.returnValue=false);
+            	var type=$(this).data('type');
+            	var id=$(this).data('id');
                 swal({
                         title: "您确定要审核这条信息吗",
                         text: "审核后将无法恢复，请谨慎操作！",
@@ -204,7 +208,7 @@
                     },
                     function (isConfirm) {
                         if (isConfirm) {
-                        	$.post('pass',{type:type,id:id},function(result){
+                        	$.post('/admin/audit/pass',{type:type,id:id},function(result){
                         		if(result.ret==1){
                         			 swal("操作成功！", "您已经了操作这条信息。", "success");
                         		}else{
@@ -236,7 +240,7 @@
                     function (isConfirm) {
                         if (isConfirm) {
                         	
-                        	$.post('refuse',{type:type,id:id},function(result){
+                        	$.post('/admin/audit/refuse',{type:type,id:id},function(result){
                         		if(result.ret==1){
                         			 swal("操作成功！", "您已经了操作这条信息。", "success");
                         		}else{

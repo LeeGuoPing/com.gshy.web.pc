@@ -105,7 +105,7 @@
                                         <button type="button" class="btn btn-danger resufe" data-id="$!{mortgage.id}" data-type="1">审核驳回</button>
                                     #else
                                     #end
-                                        <a class="btn btn-w-m btn-primary" href="detail?type=1&Id=$!{mortgage.id}">查看详情</a>
+                                        <a class="btn btn-w-m btn-primary" href="/admin/audit/detail?type=1&Id=$!{mortgage.id}">查看详情</a>
                                     </td>
                                 </tr>
                                 #end
@@ -196,7 +196,7 @@
                     function (isConfirm) {
                         if (isConfirm) {
                         	
-                        	$.post('pass',{type:type,id:id},function(result){
+                        	$.post('/admin/audit/pass',{type:type,id:id},function(result){
                         		if(result.ret==1){
                         			 swal("操作成功！", "您已经了操作这条信息。", "success");
                         		}else{
@@ -230,7 +230,7 @@
                     function (isConfirm) {
                         if (isConfirm) {
                         	
-                        	$.post('refuse',{type:type,id:id},function(result){
+                        	$.post('/admin/audit/refuse',{type:type,id:id},function(result){
                         		if(result.ret==1){
                         			 swal("操作成功！", "您已经了操作这条信息。", "success");
                         		}else{
