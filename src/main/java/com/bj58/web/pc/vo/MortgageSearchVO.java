@@ -105,6 +105,7 @@ public class MortgageSearchVO {
 		if(createTimeRange.getBegin()!=null || createTimeRange.getEnd()!=null){
 			builder.setCreateTime(createTimeRange);			
 		}
+		builder.setOrderBy("id desc");
 		builder.setPage(page);
 		builder.setPageSize(pageSize);
 		return builder.build();

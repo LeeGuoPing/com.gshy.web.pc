@@ -104,6 +104,7 @@ public class AdvanceMoneySearchVO {
 		if(createTimeRange.getBegin()!=null || createTimeRange.getEnd()!=null){
 			builder.addCreateTime(createTimeRange);			
 		}
+		builder.setOrderBy("id desc");
 		builder.setPage(page);
 		builder.setPageSize(pageSize);
 		return builder.build();
