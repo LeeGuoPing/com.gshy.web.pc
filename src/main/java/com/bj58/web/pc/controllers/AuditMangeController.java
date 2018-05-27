@@ -163,8 +163,8 @@ public class AuditMangeController extends BaseController{
 		try {
 			AuditInterface audit = auditService.getAudit(type, id);
 			List<Image> images = imageBLL.getByType(type, id);
-			beat.getModel().add(audit);
-			beat.getModel().add(images);
+			beat.getModel().add("audit",audit);
+			beat.getModel().add("images",images);
 			beat.getModel().add("employeeMap",getAllEmployee());
 		} catch (Exception e) {
 			e.printStackTrace();
